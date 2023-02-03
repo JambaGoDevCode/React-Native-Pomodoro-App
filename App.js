@@ -1,20 +1,36 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Platform } from 'react-native';
+
+import { colors, Colors } from './src/utils/colors';
+import { Pomodoro } from './src/features/Pomodoro';
+import { Timer } from './src/features/Timer';
 
 export default function App() {
+  const [currentSubject, setCurrentSubject] = useState(null)
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      {!currentSubject? 
+        (
+          <Pomodoro addSubject={setCurrentSubject}/>
+        ): (
+          <Timer
+            focusSubject={currentSubject}
+            onTimerEnd={()=> {}}
+            clearSubject={()=> {}}
+          />
+        )
+      }
+    </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight: 0,
+    backgroundColor: colors.dackblue,
   },
 });
