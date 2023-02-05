@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Vibration } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
@@ -18,19 +18,32 @@ const theme = {
     },
   };
 
+const ONE_SECOND_IN_MS = 1000;
+
+const PATTERN = [
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS,
+];
+
 export const Timer = ({ focusSubject }) => {
   const [isStarted, setIsStarded] = useState(false);
   const [progress, setProgress] = useState(1)
+  const [minutes, setMinutes ] = useState(0.5)
 
-  
 
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
         <Countdown
+        minutes={minutes}
           isPaused={!isStarted}
           onProgress={(progress) => setProgress(progress)}
-          onEnd={() => {}}
+          onEnd={() => {
+            Vibration.vibrate(PATTERN)
+          }}
         />
         <View style={{ paddingTop: spacing.lg }}>
           <Text style={styles.title}> Focos on:</Text>
