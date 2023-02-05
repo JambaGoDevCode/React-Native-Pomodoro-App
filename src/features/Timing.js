@@ -33,7 +33,7 @@ export const Timing = ({ onChangeTime }) =>{
             style={{fontSize:8}}
                 size={75}
                 title="relax"
-                onPress= {()=> onChangeTime(5)}
+                onPress= {()=> onChangeTime(0.4)}
             />
         </View>
        </>

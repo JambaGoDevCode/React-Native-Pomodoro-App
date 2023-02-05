@@ -11,11 +11,13 @@ export const Countdown = ({ minutes = 5, isPaused, onProgress, onEnd}) => {
     const interval = React.useRef(null);
     const [millis, setMillis] = useState(null);
 
+    const reset = () => setMillis(minutesToMillis(minutes))
+
     const countdown = () => {
        setMillis((time)=>{
         if(time === 0){
             clearInterval(interval.current);
-            onEnd();
+            onEnd(reset);
             return true;
         }
         const timeLest = time - 1000;

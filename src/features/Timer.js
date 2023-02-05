@@ -5,6 +5,7 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
+import { useKeepAwake } from "expo-keep-awake";
 
 import { Countdown } from "../components/Countdown";
 import { RoundedButton } from "../components/RoundedButton";
@@ -32,9 +33,17 @@ const PATTERN = [
 ];
 
 export const Timer = ({ focusSubject, clearSubject }) => {
+    useKeepAwake()
   const [isStarted, setIsStarded] = useState(false);
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(5);
+
+  const OnEnd = (reset) => {
+    Vibration.vibrate(PATTERN);
+    setIsStarded(false);
+    setProgress(1);
+    reset()
+  }
 
   return (
     <View style={styles.container}>
@@ -43,9 +52,7 @@ export const Timer = ({ focusSubject, clearSubject }) => {
           minutes={minutes}
           isPaused={!isStarted}
           onProgress={(progress) => setProgress(progress)}
-          onEnd={() => {
-            Vibration.vibrate(PATTERN);
-          }}
+          onEnd={OnEnd}
         />
         <View style={{ paddingTop: spacing.lg }}>
           <Text style={styles.title}> Focos on:</Text>
