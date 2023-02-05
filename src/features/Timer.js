@@ -22,6 +22,8 @@ export const Timer = ({ focusSubject }) => {
   const [isStarted, setIsStarded] = useState(false);
   const [progress, setProgress] = useState(1)
 
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
