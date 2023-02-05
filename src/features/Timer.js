@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Vibration } from "react-native";
 import { ProgressBar } from "react-native-paper";
-import {
-  MD3LightTheme as DefaultTheme,
-  Provider as PaperProvider,
-} from "react-native-paper";
+import { MD3LightTheme as DefaultTheme } from "react-native-paper";
 import { useKeepAwake } from "expo-keep-awake";
 
 import { Countdown } from "../components/Countdown";
@@ -33,7 +30,7 @@ const PATTERN = [
 ];
 
 export const Timer = ({ focusSubject, clearSubject, onTimeEnd }) => {
-    useKeepAwake()
+  useKeepAwake();
   const [isStarted, setIsStarded] = useState(false);
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(5);
@@ -43,8 +40,8 @@ export const Timer = ({ focusSubject, clearSubject, onTimeEnd }) => {
     setIsStarded(false);
     setProgress(1);
     reset();
-    onTimeEnd(focusSubject)
-  }
+    onTimeEnd(focusSubject);
+  };
 
   return (
     <View style={styles.container}>
@@ -77,7 +74,7 @@ export const Timer = ({ focusSubject, clearSubject, onTimeEnd }) => {
         )}
       </View>
       <View style={styles.clearSubjectWrapper}>
-      <RoundedButton size={50} title="-" onPress={clearSubject}/>
+        <RoundedButton size={50} title="-" onPress={clearSubject} />
       </View>
     </View>
   );
@@ -108,9 +105,8 @@ const styles = StyleSheet.create({
     color: colors.white,
     textAlign: "center",
   },
-  clearSubjectWrapper:{
+  clearSubjectWrapper: {
     flexDirection: "row",
     justifyContent: "center",
-
-  }
+  },
 });
