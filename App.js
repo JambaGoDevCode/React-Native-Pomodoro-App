@@ -6,19 +6,26 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { colors, Colors } from "./src/utils/colors";
 import { Pomodoro } from "./src/features/Pomodoro";
 import { Timer } from "./src/features/Timer";
+import { FocusHistory } from "./src/features/FocousHistory";
 
 export default function App() {
-  const [currentSubject, setCurrentSubject] = useState(null);
+  const [currentSubject, setCurrentSubject] = useState();
+  const [history, setHistory ] = useState([])
 
   return (
     <PaperProvider>
       <SafeAreaView style={styles.container}>
         {!currentSubject ? (
+          <>
           <Pomodoro addSubject={setCurrentSubject} />
+          <FocusHistory history={history}/>
+          </>
         ) : (
           <Timer
             focusSubject={currentSubject}
-            onTimerEnd={() => {}}
+            onTimeEnd={(subject) => { 
+              setHistory([...history, subject])
+            }}
             clearSubject={() => setCurrentSubject(null)}
           />
         )}

@@ -27,7 +27,7 @@ export const Pomodoro = ({addSubject}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.1,
   },
   textInput:{
     flex: 1,

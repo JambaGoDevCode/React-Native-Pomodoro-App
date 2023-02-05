@@ -32,7 +32,7 @@ const PATTERN = [
   1 * ONE_SECOND_IN_MS,
 ];
 
-export const Timer = ({ focusSubject, clearSubject }) => {
+export const Timer = ({ focusSubject, clearSubject, onTimeEnd }) => {
     useKeepAwake()
   const [isStarted, setIsStarded] = useState(false);
   const [progress, setProgress] = useState(1);
@@ -42,7 +42,8 @@ export const Timer = ({ focusSubject, clearSubject }) => {
     Vibration.vibrate(PATTERN);
     setIsStarded(false);
     setProgress(1);
-    reset()
+    reset();
+    onTimeEnd(focusSubject)
   }
 
   return (
