@@ -7,7 +7,7 @@ import { colors } from "../utils/colors";
 const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
-export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd}) => {
+export const Countdown = ({ minutes = 0.5, isPaused, onProgress, onEnd}) => {
     const interval = React.useRef(null);
     const [millis, setMillis] = useState(null);
 
@@ -47,7 +47,7 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd}) => {
     const seconds = Math.floor(millis / 1000) % 60;
 
     return(
-        <Text style={StyleSheet.text}>
+        <Text style={styles.text}>
             {formatTime(minute)} : {formatTime(seconds)}
         </Text>
     );
@@ -57,10 +57,9 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd}) => {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: fontSizes.xxxl,
+        fontSize: fontSizes.xxl,
         fontWeight: 'bold',
         color: colors.white,
         padding: spacing.lg,
-        backgroundColor: "#fff",
     }
 })
